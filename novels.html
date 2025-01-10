@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Novels List</title>
+</head>
+<body>
+    <h1>List of Novels</h1>
+    
+    <form action="{{ url_for('search') }}" method="GET">
+        <input type="text" name="query" placeholder="Search by title or author">
+        <button type="submit">Search</button>
+    </form>
+    
+    <a href="{{ url_for('add_novel') }}">Add a New Novel</a>
+    <br><br>
+
+    {% if novels %}
+        <ul>
+            {% for novel in novels %}
+                <li>
+                    <strong>Title:</strong> {{ novel.title }}<br>
+                    <strong>Author:</strong> {{ novel.author }}<br>
+                    <strong>Genre:</strong> {{ novel.genre }}<br>
+                    <strong>Description:</strong> {{ novel.description }}<br>
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No novels found.</p>
+    {% endif %}
+    
+    <a href="{{ url_for('index') }}">Home</a>
+</body>
+</html>
